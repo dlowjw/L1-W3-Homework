@@ -1,0 +1,43 @@
+main {
+  width: 80%;
+  margin: auto;
+}
+
+#main-content {
+  display: flex;
+  flex-direction: row;
+  justify-self: center;
+  height: 85vh;
+  color: white;
+}
+
+#articles {
+  border: solid;
+  border-color: white;
+  flex-basis: 75%;
+  padding: 20px;
+}
+
+#sidebar {
+  border: solid;
+  border-color: red;
+  flex-basis: 25%;
+  padding: 20px;
+  text-align: center;
+}
+
+section h2, h3 {
+  text-decoration: underline;
+}
+
+#sidebar h2 {
+  line-height: 5rem;
+}
+
+#sidebar h3 {
+  line-height: 2rem;
+}
+
+#sidebar h4 {
+  line-height: 1.5rem;
+}
