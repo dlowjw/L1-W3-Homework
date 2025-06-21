@@ -1,27 +1,32 @@
 main {
   width: 80%;
   margin: auto;
+  padding-top: 10vh;
 }
 
 #main-content {
   display: flex;
   flex-direction: row;
   justify-self: center;
+  width: 100%;
   height: 85vh;
   color: white;
 }
 
 #articles {
-  border: solid;
-  border-color: white;
-  flex-basis: 75%;
+  /* testing */
+  /* border: solid;
+  border-color: white; */
+  flex-basis: 80%;
   padding: 20px;
+  justify-content: space-between;
 }
 
 #sidebar {
-  border: solid;
-  border-color: red;
-  flex-basis: 25%;
+  /* testing */
+  /* border: solid;
+  border-color: red; */
+  flex-basis: 20%;
   padding: 20px;
   text-align: center;
 }
@@ -40,4 +45,23 @@ section h2, h3 {
 
 #sidebar h4 {
   line-height: 1.5rem;
+}
+
+#articles {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.article-thumbnail {
+    /* testing */
+  /* border: solid;
+  border-color: white; */
+  padding: 30px;
+  max-width: 500px;
+  max-height: auto;
+  margin-bottom: 50px;
+}
+
+.article-thumbnail img {
+  max-width: 100%;
 }
