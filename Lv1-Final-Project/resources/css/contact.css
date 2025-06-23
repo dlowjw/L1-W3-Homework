@@ -1,0 +1,17 @@
+main {
+  width: 80%;
+  margin: auto;
+  padding-top: 10vh;
+  color: white;
+  justify-items: center;
+  align-items: center;
+  height: 100vh;
+}
+
+form {
+  padding: 50px;
+}
+
+form button {
+  justify-self: center;
+}
