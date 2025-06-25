@@ -1,17 +1,20 @@
 main {
-  width: 80%;
-  margin: auto;
-  padding-top: 10vh;
+  display: flex;
+  width: 100%;
   color: white;
-  justify-items: center;
+  justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
 form {
-  padding: 50px;
+  /* border: red solid 5px; */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 form button {
-  justify-self: center;
+  margin-top: 20px;
+  align-self: center;
 }
