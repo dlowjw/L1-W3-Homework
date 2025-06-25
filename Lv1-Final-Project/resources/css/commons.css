@@ -22,9 +22,10 @@ header {
   background-color: rgba(0, 0, 0, 1);
 }
 
-header nav ul {
+nav {
   display: flex;
-  list-style-type: none;
+  gap: 50px;
+  /* border: red solid 5px; */
 }
 
 nav li {
