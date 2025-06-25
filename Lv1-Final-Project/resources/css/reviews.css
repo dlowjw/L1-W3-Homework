@@ -52,6 +52,10 @@ main {
   margin-bottom: 50px;
 }
 
+.author {
+  text-decoration: underline;
+}
+
 .article-thumbnail img {
   max-width: 100%;
   border-radius: 30px;
