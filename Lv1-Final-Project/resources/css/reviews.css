@@ -4,6 +4,12 @@ main {
   padding-top: 10vh;
 }
 
+@media only screen and (max-width: 760px) {
+  main {
+    width: 100%;
+  }
+}
+
 #main-content {
   /* border: red solid 5px; */
   display: flex;
