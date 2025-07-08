@@ -27,7 +27,7 @@ const totalCount = document.getElementById("totalCount");
 // 3.4 – Update the totalCount paragraph with guestList.length
 
 const renderList = () => {
-
+  
 }
 
 // ---------- STEP 4: Create a function called handleAdd() ----------
@@ -49,7 +49,7 @@ const handleAdd = () => {
 // 5.3 – Call renderList() to update the UI
 
 const handleRemoveLast = () => {
-  
+
 }
 
 // ---------- STEP 6: Add event listeners ----------
