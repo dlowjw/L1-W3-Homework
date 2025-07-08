@@ -1,6 +1,7 @@
 // ---------- STEP 1: Create the array ----------
 // Create an empty array called guestList to store names
-let guestlist = [];
+// Damien Note: I changed the variable name here cause it was conflicting with step 2 having the same name
+let listOfGuests = [];
 
 // ---------- STEP 2: Select the DOM elements ----------
 // Use getElementById to select:
@@ -27,34 +28,69 @@ const totalCount = document.getElementById("totalCount");
 // 3.4 – Update the totalCount paragraph with guestList.length
 
 const renderList = () => {
-  
+  guestList.innerHTML = "";
+  let list = guestList.querySelectorAll("li");
+
+  let newInnerHTML = "";
+  for (let i = 0; i < listOfGuests.length; ++i)
+  {
+    newInnerHTML += "<li>" + listOfGuests[i] + "</li>";
+    console.log(newInnerHTML);
+  }
+  guestList.innerHTML = newInnerHTML;
+  totalCount.innerHTML = "Total Guests: " + listOfGuests.length;
 }
 
 // ---------- STEP 4: Create a function called handleAdd() ----------
 // Inside the function:
-// 4.1 – Get the value from the input box and trim it
-// 4.2 – If the value is empty, alert the user and stop the function
-// 4.3 – Otherwise, use push() to add the name to guestList
-// 4.4 – Clear the input field
-// 4.5 – Call renderList() to update the UI
+// 4.1 – Get the value from the input box and trim it (Done)
+// 4.2 – If the value is empty, alert the user and stop the function (Done)
+// 4.3 – Otherwise, use push() to add the name to guestList (Done)
+// 4.4 – Clear the input field (Done)
+// 4.5 – Call renderList() to update the UI (Done)
 
 const handleAdd = () => {
+  const inputText = guestInput.value.trim();
+  if (inputText) {
+    listOfGuests.push(guestInput.value);
+    guestInput.value = "";
+  } else {
+    alert("Please type a guest name to add");
+  }
 
+  console.log(listOfGuests);
+
+  renderList();
 }
 
 // ---------- STEP 5: Create a function called handleRemoveLast() ----------
 // Inside the function:
-// 5.1 – If the array is empty, alert the user and stop
-// 5.2 – Otherwise, use pop() to remove the last name
-// 5.3 – Call renderList() to update the UI
+// 5.1 – If the array is empty, alert the user and stop (Done)
+// 5.2 – Otherwise, use pop() to remove the last name (Done)
+// 5.3 – Call renderList() to update the UI (Done)
 
 const handleRemoveLast = () => {
+  let guestArray = guestList.querySelectorAll("li");
+  console.log(guestArray.length);
+  console.log(typeof guestArray);
+  if (guestArray.length) {
+    listOfGuests.pop();
+  }
+  else {
+    alert("Nothing to remove");
+  }
 
+  console.log(listOfGuests);
+
+  renderList();
 }
 
 // ---------- STEP 6: Add event listeners ----------
 // Add a click event to the Add button that calls handleAdd()
+addBtn.addEventListener("click", handleAdd);
 // Add a click event to the Remove Last button that calls handleRemoveLast()
+removeBtn.addEventListener("click", handleRemoveLast);
 
 // ---------- STEP 7: Call renderList() at the end ----------
 // This makes sure the list is empty and count is 0 when the page loads
+renderList();
