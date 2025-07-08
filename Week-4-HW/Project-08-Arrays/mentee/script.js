@@ -28,17 +28,28 @@ const totalCount = document.getElementById("totalCount");
 // 3.4 – Update the totalCount paragraph with guestList.length
 
 const renderList = () => {
+
   guestList.innerHTML = "";
-  let list = guestList.querySelectorAll("li");
+
+  for (let i = 0; i < listOfGuests.length; ++i)
+  {
+    const node = document.createElement("li");
+    node.innerText = listOfGuests[i];
+    guestList.appendChild(node);
+  }
+
+  totalCount.innerHTML = "Total Guests: " + listOfGuests.length;
+
+  // My first solution
+  /* guestList.innerHTML = "";
 
   let newInnerHTML = "";
   for (let i = 0; i < listOfGuests.length; ++i)
   {
     newInnerHTML += "<li>" + listOfGuests[i] + "</li>";
-    console.log(newInnerHTML);
   }
   guestList.innerHTML = newInnerHTML;
-  totalCount.innerHTML = "Total Guests: " + listOfGuests.length;
+  totalCount.innerHTML = "Total Guests: " + listOfGuests.length; */
 }
 
 // ---------- STEP 4: Create a function called handleAdd() ----------
@@ -58,8 +69,6 @@ const handleAdd = () => {
     alert("Please type a guest name to add");
   }
 
-  console.log(listOfGuests);
-
   renderList();
 }
 
@@ -71,16 +80,12 @@ const handleAdd = () => {
 
 const handleRemoveLast = () => {
   let guestArray = guestList.querySelectorAll("li");
-  console.log(guestArray.length);
-  console.log(typeof guestArray);
   if (guestArray.length) {
     listOfGuests.pop();
   }
   else {
     alert("Nothing to remove");
   }
-
-  console.log(listOfGuests);
 
   renderList();
 }
