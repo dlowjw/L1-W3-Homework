@@ -94,6 +94,9 @@ let currentIndex = 0;
 let score = 0;
 let timeLeft = 10;
 let timerId = null;
+// Modified: My own variable
+let restartGame = false;
+
 // console.log(currentIndex);
 // console.log("intial state:", { currentIndex, score, timeLeft, timerId });
 /* 
@@ -107,16 +110,6 @@ startBtn.addEventListener("click", startGame);
 restartBtn.addEventListener("click", startGame);
 console.log("This works");
 
-function startGame() {
-  console.log("Start game");
-  currentIndex = 0;
-  score = 0;
-  swapScreen(startScreen, questionScreen);
-  showQuestion();
-}
-
-console.log({ currentIndex, score });
-
 /* 
 STEP 5: FUNCTION – startGame()
 Create a function named `startGame` that:
@@ -124,6 +117,20 @@ Create a function named `startGame` that:
 - Switches from the start screen to the question screen
 - Calls the `showQuestion()` function
 */
+
+function startGame() {
+  console.log("Start game");
+  currentIndex = 0;
+  score = 0;
+  // Modified: If starting from results screen without the check, the results screen will be displayed alongside the questions in next round
+  if (restartGame)
+    swapScreen(resultScreen, questionScreen);
+  else
+    swapScreen(startScreen, questionScreen);
+  showQuestion();
+}
+
+//console.log({ currentIndex, score });
 
 /* 
 STEP 6: FUNCTION – showQuestion()
@@ -147,10 +154,15 @@ const showQuestion = () => {
 
   q.answers.forEach((answer, i) => {
     let button = document.createElement("button");
-    button.ClassName = "answer-btn";
+    // To ask later: this doesn't work?
+    // button.ClassName = "answer-btn";
+    // Modified: used this line instead
+    button.classList.add("answer-btn");
     button.textContent = answer;
-    button.dataset.index = i;
+    // Assigns an index to each button, in handleAnswer, the pointer event can check which index was selected
+    button.dataset.index = i; 
 
+    // To ask later, for Aria?
     button.setAttribute("role", "button");
     button.setAttribute("tab-index", "0");
 
@@ -160,7 +172,8 @@ const showQuestion = () => {
   resetTimer();
 };
 
-console.log(`q.question + 1`, q.question);
+// console.log(`q.question + 1`, q.question);
+
 /* 
 STEP 7: FUNCTION – handleAnswer()
 Create a function named `handleAnswer` that:
@@ -177,11 +190,14 @@ Create a function named `handleAnswer` that:
 */
 
 function handleAnswer(e) {
+  // To Ask later
   clearInterval(timerId);
 
   const chosenIdx = Number(e.target.dataset.index);
   const q = questions[currentIndex];
   const buttons = document.querySelectorAll(".answer-btn");
+
+  console.log(buttons);
 
   buttons.forEach((btn) => {
     const idx = Number(btn.dataset.index);
@@ -198,6 +214,9 @@ function handleAnswer(e) {
   if (chosenIdx === q.correct) {
     score++;
   }
+
+  // Modified: Didn't increment current index in class
+  currentIndex++;
 
   setTimeout(() => {
     if (currentIndex < questions.length) {
@@ -219,6 +238,18 @@ Create a function named `showResults` that:
     - Less than half → “💀 Novice – Study the ancient scrolls again!”
 */
 
+const showResults = () => {
+  swapScreen(questionScreen, resultScreen);
+  finalScoreEl.innerText = score;
+  if (score === 4)
+    resultMsgEl.innerText = "✨ Supreme Wizard of JavaScript! ✨";
+  else if (score >= 2)
+    resultMsgEl.innerText = "🧙 Apprentice Mage – Keep Practicing!";
+  else
+    resultMsgEl.innerText = "💀 Novice – Study the ancient scrolls again!";
+  restartGame = true;
+}
+
 /* 
 STEP 9: FUNCTION – resetTimer()
 Create a function named `resetTimer` that:
@@ -230,9 +261,34 @@ Create a function named `resetTimer` that:
       (use: { target: { dataset: { index: -1 } } })
 */
 
+const resetTimer = () => {
+
+  timeLeft = 10;
+  timerDisplay.innerText = timeLeft;
+
+  timerId = setInterval(() => {
+    --timeLeft;
+    timerDisplay.innerText = timeLeft;
+    if (timeLeft === 0) {
+      clearInterval(timerId);
+      handleAnswer({ target: { dataset: { index: -1 } } });
+    }
+  }, 1000);
+}
+
 /* 
 STEP 10: FUNCTION – swapScreen()
 Create a function named `swapScreen(hideEl, showEl)` that:
 - Hides all elements with the class `.screen` using `classList.add("hidden")`
 - Shows the element passed as `showEl` using `classList.remove("hidden")`
 */
+
+const swapScreen = (hideEl, showEl) => {
+  const buttons = document.querySelectorAll(".answer-btn");
+
+  hideEl.classList.remove("showing");
+  hideEl.classList.add("hidden");
+
+  showEl.classList.remove("hidden");
+  showEl.classList.remove("showing");
+}
