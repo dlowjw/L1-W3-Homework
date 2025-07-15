@@ -154,15 +154,13 @@ const showQuestion = () => {
 
   q.answers.forEach((answer, i) => {
     let button = document.createElement("button");
-    // To ask later: this doesn't work?
-    // button.ClassName = "answer-btn";
     // Modified: used this line instead
+    // button.ClassName = "answer-btn";
     button.classList.add("answer-btn");
     button.textContent = answer;
     // Assigns an index to each button, in handleAnswer, the pointer event can check which index was selected
     button.dataset.index = i; 
 
-    // To ask later, for Aria?
     button.setAttribute("role", "button");
     button.setAttribute("tab-index", "0");
 
@@ -190,7 +188,6 @@ Create a function named `handleAnswer` that:
 */
 
 function handleAnswer(e) {
-  // To Ask later
   clearInterval(timerId);
 
   const chosenIdx = Number(e.target.dataset.index);
