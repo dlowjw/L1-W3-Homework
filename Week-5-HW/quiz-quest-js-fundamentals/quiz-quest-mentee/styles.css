@@ -25,12 +25,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  flex-direction: column;
+  height: 100vh;
   padding: 1rem;
+  overflow: hidden;
 }
 
 .screen {
   max-width: 480px;
+  position: absolute;
   width: 100%;
   background: var(--parchment);
   border: 8px solid var(--ink);
@@ -39,6 +42,12 @@ body {
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
   text-align: center;
   transition: opacity 0.3s ease;
+  position: absolute; /* isolate each screen */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 480px;
 }
 
 .hidden {

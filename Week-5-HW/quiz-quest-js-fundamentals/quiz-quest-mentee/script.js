@@ -123,9 +123,9 @@ function startGame() {
   currentIndex = 0;
   score = 0;
   // Modified: If starting from results screen without the check, the results screen will be displayed alongside the questions in next round
-  if (restartGame)
-    swapScreen(resultScreen, questionScreen);
-  else
+  // if (restartGame)
+  //   swapScreen(resultScreen, questionScreen);
+  // else
     swapScreen(startScreen, questionScreen);
   showQuestion();
 }
@@ -147,7 +147,8 @@ Create a function named `showQuestion` that:
 - Calls `resetTimer()`
 */
 
-const showQuestion = () => {
+function showQuestion() {
+// const showQuestion = () => {
   answersDiv.innerHTML = "";
   let q = questions[currentIndex];
   questionText.textContent = q.question;
@@ -155,14 +156,14 @@ const showQuestion = () => {
   q.answers.forEach((answer, i) => {
     let button = document.createElement("button");
     // Modified: used this line instead
-    // button.ClassName = "answer-btn";
-    button.classList.add("answer-btn");
+    button.className = "answer-btn";
+    // button.classList.add("answer-btn");
     button.textContent = answer;
     // Assigns an index to each button, in handleAnswer, the pointer event can check which index was selected
     button.dataset.index = i; 
 
     button.setAttribute("role", "button");
-    button.setAttribute("tab-index", "0");
+    button.setAttribute("tabindex", "0");
 
     button.addEventListener("click", handleAnswer);
     answersDiv.appendChild(button);
@@ -235,7 +236,8 @@ Create a function named `showResults` that:
     - Less than half → “💀 Novice – Study the ancient scrolls again!”
 */
 
-const showResults = () => {
+function showResults() {
+// const showResults = () => {
   swapScreen(questionScreen, resultScreen);
   finalScoreEl.innerText = score;
   if (score === 4)
@@ -244,7 +246,7 @@ const showResults = () => {
     resultMsgEl.innerText = "🧙 Apprentice Mage – Keep Practicing!";
   else
     resultMsgEl.innerText = "💀 Novice – Study the ancient scrolls again!";
-  restartGame = true;
+  restartGame = false;
 }
 
 /* 
@@ -258,8 +260,8 @@ Create a function named `resetTimer` that:
       (use: { target: { dataset: { index: -1 } } })
 */
 
-const resetTimer = () => {
-
+// const resetTimer = () => {
+function resetTimer() {
   timeLeft = 10;
   timerDisplay.innerText = timeLeft;
 
@@ -280,12 +282,15 @@ Create a function named `swapScreen(hideEl, showEl)` that:
 - Shows the element passed as `showEl` using `classList.remove("hidden")`
 */
 
-const swapScreen = (hideEl, showEl) => {
-  const buttons = document.querySelectorAll(".answer-btn");
+// const swapScreen = (hideEl, showEl) => {
+function swapScreen(_, showEl) {
+  // hideEl.classList.remove("showing");
+  // hideEl.classList.add("hidden");
 
-  hideEl.classList.remove("showing");
-  hideEl.classList.add("hidden");
+  // showEl.classList.remove("hidden");
+  // showEl.classList.remove("showing");
 
+  const allScreens = document.querySelectorAll(".screen");
+  allScreens.forEach((screen) => screen.classList.add("hidden"));
   showEl.classList.remove("hidden");
-  showEl.classList.remove("showing");
 }
