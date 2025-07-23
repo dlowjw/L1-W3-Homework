@@ -22,6 +22,10 @@ main {
   margin-bottom: 10vh;
 }
 
+.light #main-content {
+  color: black;
+}
+
 /* Review contents */
 
 #review {

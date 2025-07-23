@@ -66,9 +66,10 @@ footer {
 
 .light {
   background-color: white;
+  color: black;
 }
 .light header {
-  background-color: white;
+  background-color: rgb(175, 175, 175);
 }
 .light #header-content {
   color: black;
@@ -80,7 +81,15 @@ footer {
   text-decoration: none;
 }
 
+.light nav a:hover {
+  color: orange;
+}
+
+.light nav a:active {
+  color: purple;
+}
+
 .light footer {
   color: black;
-  background-color: white;
+  background-color: rgb(175, 175, 175);
 }

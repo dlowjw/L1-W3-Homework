@@ -7,6 +7,10 @@ main {
   min-height: 100vh;
 }
 
+.light main {
+  color: black;
+}
+
 form {
   /* border: red solid 5px; */
   display: flex;
@@ -17,4 +21,8 @@ form {
 form button {
   margin-top: 20px;
   align-self: center;
+}
+
+footer {
+  position: fixed;
 }
