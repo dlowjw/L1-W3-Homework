@@ -1,5 +1,5 @@
 body {
-  /* background-image: url("https://images.pexels.com/photos/32524109/pexels-photo-32524109.jpeg"); */
+  background-image: url("https://images.pexels.com/photos/32524109/pexels-photo-32524109.jpeg");
   background-size: cover;
   background-attachment: fixed;
   background-color: rgba(0, 0, 0, 0.9);
@@ -27,6 +27,7 @@ main h1 {
 }
 
 footer {
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.6);
 }
 
@@ -37,4 +38,12 @@ main h1, main p {
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
+}
+
+.light header {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.light footer {
+  background-color: rgba(255, 255, 255, 0.9);
 }
