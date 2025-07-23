@@ -20,6 +20,10 @@ main {
   color: white;
 }
 
+.light #main-content {
+  color: black;
+}
+
 /* Article List */
 
 #articles {
