@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+.light {
+  background-color: white;
+}
+
 body {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background-color: rgba(0, 0, 0, 0.9);
