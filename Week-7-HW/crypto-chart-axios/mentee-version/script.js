@@ -22,10 +22,8 @@ function createChart(Chart, coinId, labels, data, symbol) {
   const chartSection = document.getElementById("chartSection");
   const canvas = document.createElement("canvas");
   canvas.id = coinId;
-  console.log("Create Chart");
+  // console.log("Create Chart");
   chartSection.appendChild(canvas);
-  // console.log(chartSection);
-  // console.log(canvas);
   
   new Chart(canvas, {
     type: 'line',
@@ -34,13 +32,14 @@ function createChart(Chart, coinId, labels, data, symbol) {
       datasets: [{
         label: symbol,
         data: data,
-        borderWidth: 1
+        borderWidth: 1,
+        fill: true
       }]
     },
     options: {
       scales: {
         y: {
-          beginAtZero: true
+          beginAtZero: false
         }
       }
     }
@@ -61,16 +60,15 @@ function createChart(Chart, coinId, labels, data, symbol) {
 //   4. After fetching all data, clear the loader (innerHTML = "").
 //   5. Loop over the returned data with forEach() and call createChart() for each coin.
 async function makeCharts() {
-  const chartContainer = document.getElementsByClassName("container");
-  chartContainer.innerHTML = "<div class='loader'></div>";
-
-  // console.log("makeCharts");
+  const chartSection = document.getElementById("chartSection");
+  chartSection.innerHTML = "<div class='loader'></div>";  // NOTE: Line doesn't seem to be needed?
 
   try {
     const results = await Promise.all(
       coins.map(async (coin) => {
         const response = await api.get("/" + coin);
         const data = response.data.data.prices.hour.prices.slice(0, 24);
+        // console.log(data);
 
         let chartData = { coinId: coin, labels: [], data: [], symbol: response.data.data.base};
 
@@ -85,7 +83,7 @@ async function makeCharts() {
     }));  
 
     console.log(results);
-    chartContainer.innerHTML = "";
+    chartSection.innerHTML = ""; 
     results.forEach((coin) => createChart(Chart, coin.coinId, coin.labels, coin.data, coin.symbol) );
 
   } catch (error) {
