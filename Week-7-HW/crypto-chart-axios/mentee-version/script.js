@@ -22,15 +22,30 @@ function createChart(Chart, coinId, labels, data, symbol) {
   const chartSection = document.getElementById("chartSection");
   const canvas = document.createElement("canvas");
   canvas.id = coinId;
-
-  console.log(chartSection);
-  console.log(canvas);
+  console.log("Create Chart");
+  chartSection.appendChild(canvas);
+  // console.log(chartSection);
+  // console.log(canvas);
   
-  // const chart = new Chart(canvas, {
-  //   labels: labels, 
-  //   data: data,
-  //   symbol: 
-  // });
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: symbol,
+        data: data,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
 }
 
 // 🧠 STEP 4: Write an async function called "makeCharts"
@@ -49,7 +64,7 @@ async function makeCharts() {
   const chartContainer = document.getElementsByClassName("container");
   chartContainer.innerHTML = "<div class='loader'></div>";
 
-  console.log("makeCharts");
+  // console.log("makeCharts");
 
   try {
     const results = await Promise.all(
@@ -71,7 +86,7 @@ async function makeCharts() {
 
     console.log(results);
     chartContainer.innerHTML = "";
-    results.forEach((coin) => createChart(chartContainer, coin.coinId, coin.labels, coin.data, coin.symbol) );
+    results.forEach((coin) => createChart(Chart, coin.coinId, coin.labels, coin.data, coin.symbol) );
 
   } catch (error) {
     alert(error);
