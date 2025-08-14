@@ -29,7 +29,7 @@ main {
 #articles {
   flex-basis: 80%;
   padding: 20px;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -50,6 +50,19 @@ main {
   color: purple;
 }
 
+.img-container {
+  display: flex;
+  width: 450px;
+  height: 300px;
+  overflow: hidden;
+  justify-self: center;
+}
+
+.img-container img {
+  /* position: relative; */
+  align-self: center;
+}
+
 #articles {
   display: flex;
   flex-wrap: wrap;
@@ -64,11 +77,6 @@ main {
 
 .author {
   text-decoration: underline;
-}
-
-.article-thumbnail img {
-  max-width: 100%;
-  border-radius: 30px;
 }
 
 /* Sidebar */
