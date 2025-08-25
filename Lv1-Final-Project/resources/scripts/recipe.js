@@ -30,7 +30,8 @@ async function getRecipe() {
     // console.log(time);
     // console.log(servings);
     // console.log(itemName);
-    console.log(ingredients);
+    // console.log(ingredients);
+    // console.log(instructions);
 
     let ingredientHTML = "";
     ingredients.forEach(ing => {
