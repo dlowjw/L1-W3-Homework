@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookmark Saver — Mentee</title>
+    <style>
+      body {
+        font-family: system-ui, Arial, sans-serif;
+        max-width: 720px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      h1 {
+        margin-bottom: 0.5rem;
+      }
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+      label {
+        display: block;
+        margin: 0.5rem 0 0.25rem;
+      }
+      input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+      button {
+        padding: 0.5rem 0.9rem;
+        border: 1px solid #bbb;
+        border-radius: 10px;
+        background: #f9f9f9;
+        cursor: pointer;
+        margin-right: 0.5rem;
+      }
+      button:hover {
+        background: #f0f0f0;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0;
+      }
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem;
+        border-bottom: 1px solid #eee;
+        gap: 0.5rem;
+      }
+      .actions {
+        white-space: nowrap;
+      }
+      .muted {
+        color: #666;
+      }
+      a {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔖 Bookmark Saver <span class="muted">— Mentee</span></h1>
+    <p class="muted">
+      Practice <code>localStorage</code> with an array of objects.
+    </p>
+
+    <div class="card">
+      <label for="title">Site Title</label>
+      <input id="title" type="text" placeholder="e.g., MDN Web Docs" />
+
+      <label for="url">Site URL</label>
+      <input
+        id="url"
+        type="url"
+        placeholder="e.g., https://developer.mozilla.org"
+      />
+
+      <div style="margin-top: 0.75rem">
+        <button id="addBtn">Add Bookmark</button>
+        <button id="showBtn">Show Bookmarks</button>
+        <button id="removeKeyBtn">removeItem('bookmarks')</button>
+        <button id="clearAllBtn">clear()</button>
+      </div>
+      <p id="status" class="muted"></p>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top: 0">Saved Bookmarks</h2>
+      <ul id="list"></ul>
+      <p id="emptyState" class="muted">No bookmarks yet.</p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
