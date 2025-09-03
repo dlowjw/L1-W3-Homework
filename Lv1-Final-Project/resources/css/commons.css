@@ -25,12 +25,6 @@ header {
   justify-content: space-between;
 }
 
-@media only screen and (max-width: 760px) {
-  #header-content {
-    width: 100%;
-  }
-}
-
 nav {
   display: flex;
   gap: 50px;
@@ -49,6 +43,18 @@ nav a:hover {
 
 nav a:active {
   color: purple;
+}
+
+.theme-button {
+  all: unset;
+}
+
+.theme-button:hover {
+  cursor: pointer;
+}
+
+#menu-icon {
+  display: none;
 }
 
 footer {
@@ -92,4 +98,44 @@ footer {
 .light footer {
   color: black;
   background-color: rgb(175, 175, 175);
+}
+
+
+@media only screen and (max-width: 420px) {
+  #header-content {
+    display: flex;
+    width: 100%;
+    height: 3vh;
+    justify-items: center;
+  }
+
+  nav {
+    display: none;
+  }
+
+  #menu-icon {
+    display: block;
+    height: 100%;
+    /* background-color: white; */
+  }
+
+  #menu-icon button {
+    height: 100%;
+    background: none;
+    border: none;
+  }
+
+  #menu-icon button:hover {
+    cursor: pointer;
+  }
+
+  #menu-icon img {
+    height: 100%;
+    filter: invert(100%);
+  }
+
+  .light #menu-icon img {
+    height: 100%;
+    filter: invert(0%);
+  }
 }
