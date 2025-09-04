@@ -58,25 +58,7 @@ nav a:active {
 }
 
 #mobile-menu {
-  display: flex;
-  flex-direction: column;
-  background-color: black;
-  color: white;
-  position: absolute;
-  width: 100%;
-  top: 10vh;
-}
-
-#mobile-menu a {
-  line-height: 50px;
-  text-align: center;
-  /* text-decoration: none; */
-  font-size: 25px;
-}
-
-#mobile-menu a:hover {
-  background-color: white;
-  color: black;
+  display: none;
 }
 
 footer {
@@ -123,7 +105,7 @@ footer {
 }
 
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 768px) {
   #header-content {
     display: flex;
     width: 100%;
@@ -160,4 +142,37 @@ footer {
     height: 100%;
     filter: invert(0%);
   }
+
+  #mobile-menu.visible {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    top: 10vh;
+  }
+
+  #mobile-menu a {
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    background-color: black;
+  }
+
+  .light #mobile-menu a {
+    color: black;
+    background-color: white;
+  }
+
+  #mobile-menu a:hover {
+    background-color: white;
+    color: black;
+  }
+
+  .light #mobile-menu a:hover {
+    background-color: black;
+    color: white;
+  }
+
 }
