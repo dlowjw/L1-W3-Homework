@@ -17,7 +17,7 @@ const listEl = document.getElementById("list");
 const statusEl = document.getElementById("status");
 const emptyStateEl = document.getElementById("emptyState");
 
-console.log(titleInput, urlInput, removeKeyBtn, emptyStateEl);
+// console.log(titleInput, urlInput, removeKeyBtn, emptyStateEl);
 
 // ---------------------------------------------------------------------------
 // STEP 2: FUNCTION loadBookmarks()
@@ -32,10 +32,10 @@ console.log(titleInput, urlInput, removeKeyBtn, emptyStateEl);
 
 const loadBookmarks = () => {
   const bookmarks = localStorage.getItem("bookmarks");
-  console.log(bookmarks);
+  // console.log(bookmarks);
   try {
     const parsed = bookmarks ? JSON.parse(bookmarks) : [];
-    console.log(parsed);
+    // console.log(parsed);
     return parsed;
   } catch (err) {
     console.error("JSON.parse did not work", err);
@@ -59,7 +59,7 @@ const saveBookmarks = (bookmarksArray) => {
   console.log(string);
 };
 
-saveBookmarks([1, 2, 3, 4]);
+// saveBookmarks([1, 2, 3, 4]);
 
 // ---------------------------------------------------------------------------
 // STEP 4: FUNCTION render()
@@ -81,7 +81,8 @@ saveBookmarks([1, 2, 3, 4]);
 const render = () => {
   listEl.innerHTML = "";
   const savedBookmarks = loadBookmarks();
-  console.log(savedBookmarks.length);
+  console.log("Bookmarks found: " + savedBookmarks.length);
+  // console.log(savedBookmarks);
 
   if (!savedBookmarks.length) {
     emptyStateEl.style.display = "block";
@@ -90,7 +91,7 @@ const render = () => {
 
   emptyStateEl.style.display = "none";
 
-  savedBookmarks.forEach = (bookmark, index) => {
+  savedBookmarks.forEach((bookmark, index) => {
     const li = document.createElement("li");
     const bookmarkURL = document.createElement("a");
     bookmarkURL.href = bookmark.url;
@@ -106,20 +107,19 @@ const render = () => {
       saveAgain.splice(index, 1);
       saveBookmarks(saveAgain);
       render();
-      setStatus();
-
-      const actions = document.createElement("div");
-      actions.className = "actions";
-      actions.appendChild(deleteBtn);
-      li.appendChild(bookmarkURL);
-      li.appendChild(deleteBtn);
-
-      listEl.appendChild(li);
+      setStatus("Bookmark Deleted"); 
     });
-  };
-};
 
-render();
+    const actions = document.createElement("div");
+    actions.className = "actions";
+    actions.appendChild(deleteBtn);
+
+    li.appendChild(bookmarkURL);
+    li.appendChild(deleteBtn);
+
+    listEl.appendChild(li);
+  });
+};
 
 // ---------------------------------------------------------------------------
 // STEP 5: FUNCTION setStatus(message)
@@ -129,10 +129,8 @@ render();
 
 const setStatus = (message) => {
   statusEl.textContent = message;
-  console.log(message);
+  // console.log(message);
 };
-
-setStatus("Didn't work");
 
 // ---------------------------------------------------------------------------
 // STEP 6: FUNCTION isValidUrl(url)
@@ -140,6 +138,13 @@ setStatus("Didn't work");
 // - Inside it: check if the url starts with "http://" or "https://"
 // - Return true if valid, false otherwise
 // - Console hint: console.log the url and the boolean result to verify your checker
+
+const isValidUrl = (url) => {
+  if (url.startsWith("http://") || url.startsWith("https://"))
+    return true;
+  else
+    return false;
+}
 
 // ---------------------------------------------------------------------------
 // STEP 7: BUTTON HANDLERS
@@ -159,7 +164,48 @@ setStatus("Didn't work");
 //     • Console hint: console.log that clear() is being called
 //     • Call localStorage.clear(), then call render(), then call setStatus("All localStorage cleared")
 
+addBtn.addEventListener("click", () => {
+  console.log("Adding Bookmark");
+  console.log("Title: " + titleInput.value);
+  console.log("URL: " + urlInput.value);
+  if (isValidUrl(urlInput.value)) {
+    let bookmarks = loadBookmarks();
+    bookmarks.push({title: titleInput.value, url: urlInput.value});
+    saveBookmarks(bookmarks);
+    titleInput.value = ""; 
+    urlInput.value = "";
+    setStatus("Bookmark saved!");
+    render();
+  }
+  else {
+    setStatus("Invalid URL");
+  }
+});
+
+showBtn.addEventListener("click", () => {
+  console.log("Showing Bookmarks");
+  render();
+  setStatus("Bookmarks loaded");
+});
+
+removeKeyBtn.addEventListener("click", () => {
+  console.log("Removing Bookmark key");
+  localStorage.removeItem("bookmarks");
+  render();
+  setStatus("'bookmarks' key removed")
+});
+
+clearAllBtn.addEventListener("click", () => {
+  console.log("Clearing All Bookmarks");
+  localStorage.clear();
+  render();
+  setStatus("All localStorage cleared");
+});
+
+
 // ---------------------------------------------------------------------------
 // STEP 8: INITIAL CALL
 // - At the very end of the file, call render() so saved bookmarks show up when the page loads
 // - Console hint: console.log that initial render is running
+
+render();
